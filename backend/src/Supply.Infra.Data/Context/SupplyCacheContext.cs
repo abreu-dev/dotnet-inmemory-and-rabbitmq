@@ -9,7 +9,7 @@ namespace Supply.Infra.Data.Context
 
         public SupplyCacheContext()
         {
-            var client = new MongoClient("mongodb://abreu:u472gy3z@localhost:27017/admin");
+            var client = new MongoClient("mongodb://abreu:RfAjiY5LL5@localhost:27017/admin");
             Database = client.GetDatabase("Supply");
         }
 
