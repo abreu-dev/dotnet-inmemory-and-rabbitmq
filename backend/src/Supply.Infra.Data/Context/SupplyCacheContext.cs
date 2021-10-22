@@ -20,5 +20,13 @@ namespace Supply.Infra.Data.Context
                 return Database.GetCollection<VehicleCache>("Vehicles");
             }
         }
+
+        public IMongoCollection<VeiculoMarcaCache> VeiculoMarcaCache
+        {
+            get
+            {
+                return Database.GetCollection<VeiculoMarcaCache>("VeiculoMarca");
+            }
+        }
     }
 }

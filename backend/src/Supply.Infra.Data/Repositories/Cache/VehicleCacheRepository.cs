@@ -5,7 +5,7 @@ using Supply.Caching.Entities;
 using Supply.Caching.Interfaces;
 using Supply.Infra.Data.Context;
 
-namespace Supply.Infra.Data.Repositories
+namespace Supply.Infra.Data.Repositories.Cache
 {
     public class VehicleCacheRepository : IVehicleCacheRepository
     {

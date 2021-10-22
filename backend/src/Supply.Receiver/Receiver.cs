@@ -9,6 +9,7 @@ using Supply.Domain.Core.Mediator;
 using Supply.Domain.Core.MessageBroker.Options;
 using Supply.Domain.Core.Messaging;
 using Supply.Domain.Events.VehicleEvents;
+using Supply.Domain.Events.VeiculoMarcaEvents;
 using Supply.Receiver.Models;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,10 @@ namespace Supply.Receiver
             {
                 new QueueInfo(typeof(VehicleAddedEvent)),
                 new QueueInfo(typeof(VehicleUpdatedEvent)),
-                new QueueInfo(typeof(VehicleRemovedEvent))
+                new QueueInfo(typeof(VehicleRemovedEvent)),
+                new QueueInfo(typeof(VeiculoMarcaAddedEvent)),
+                new QueueInfo(typeof(VeiculoMarcaUpdatedEvent)),
+                new QueueInfo(typeof(VeiculoMarcaRemovedEvent))
             };
 
             _hostName = rabbitMqOptions.Value.HostName;

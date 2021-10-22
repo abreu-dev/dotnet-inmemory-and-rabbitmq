@@ -6,13 +6,16 @@ using Supply.Application.Services;
 using Supply.Caching.Interfaces;
 using Supply.Domain.CommandHandlers;
 using Supply.Domain.Commands.VehicleCommands;
+using Supply.Domain.Commands.VeiculoMarcaCommands;
 using Supply.Domain.Core.Mediator;
 using Supply.Domain.Core.MessageBroker;
 using Supply.Domain.Events.VehicleEvents;
+using Supply.Domain.Events.VeiculoMarcaEvents;
 using Supply.Domain.Interfaces;
 using Supply.Infra.Data.Context;
 using Supply.Infra.Data.EventHandlers;
-using Supply.Infra.Data.Repositories;
+using Supply.Infra.Data.Repositories.Cache;
+using Supply.Infra.Data.Repositories.Data;
 
 namespace Supply.Infra.CrossCutting.IoC
 {
@@ -22,6 +25,7 @@ namespace Supply.Infra.CrossCutting.IoC
         {
             // Application
             services.AddScoped<IVehicleAppService, VehicleAppService>();
+            services.AddScoped<IVeiculoMarcaAppService, VeiculoMarcaAppService>();
 
             // Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, MediatorHandler>();
@@ -34,14 +38,26 @@ namespace Supply.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<UpdateVehicleCommand, ValidationResult>, VehicleCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveVehicleCommand, ValidationResult>, VehicleCommandHandler>();
 
+            services.AddScoped<IRequestHandler<AddVeiculoMarcaCommand, ValidationResult>, VeiculoMarcaCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateVeiculoMarcaCommand, ValidationResult>, VeiculoMarcaCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveVeiculoMarcaCommand, ValidationResult>, VeiculoMarcaCommandHandler>();
+
             // Domain - Events
             services.AddScoped<INotificationHandler<VehicleAddedEvent>, VehicleEventHandler>();
             services.AddScoped<INotificationHandler<VehicleUpdatedEvent>, VehicleEventHandler>();
             services.AddScoped<INotificationHandler<VehicleRemovedEvent>, VehicleEventHandler>();
 
+            services.AddScoped<INotificationHandler<VeiculoMarcaAddedEvent>, VeiculoMarcaEventHandler>();
+            services.AddScoped<INotificationHandler<VeiculoMarcaUpdatedEvent>, VeiculoMarcaEventHandler>();
+            services.AddScoped<INotificationHandler<VeiculoMarcaRemovedEvent>, VeiculoMarcaEventHandler>();
+
             // Infra - Data
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IVeiculoMarcaRepository, VeiculoMarcaRepository>();
+
             services.AddScoped<IVehicleCacheRepository, VehicleCacheRepository>();
+            services.AddScoped<IVeiculoMarcaCacheRepository, VeiculoMarcaCacheRepository>();
+
             services.AddScoped<SupplyDataContext>();
             services.AddScoped<SupplyCacheContext>();
         }

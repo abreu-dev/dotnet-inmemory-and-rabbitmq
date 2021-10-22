@@ -31,11 +31,32 @@ namespace Supply.Infra.Data.Migrations
                         .HasColumnName("Plate");
 
                     b.Property<bool>("Removed")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Removed");
 
                     b.HasKey("Id");
 
                     b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("Supply.Domain.Entities.VeiculoMarca", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Nome");
+
+                    b.Property<bool>("Removed")
+                        .HasColumnType("bit")
+                        .HasColumnName("Removed");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VeiculoMarca");
                 });
 #pragma warning restore 612, 618
         }

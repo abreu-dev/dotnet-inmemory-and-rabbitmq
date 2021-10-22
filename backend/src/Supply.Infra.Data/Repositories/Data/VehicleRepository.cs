@@ -9,7 +9,7 @@ using Supply.Domain.Entities;
 using Supply.Domain.Interfaces;
 using Supply.Infra.Data.Context;
 
-namespace Supply.Infra.Data.Repositories
+namespace Supply.Infra.Data.Repositories.Data
 {
     public class VehicleRepository : IVehicleRepository
     {
