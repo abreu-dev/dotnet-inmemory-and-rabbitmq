@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Supply.Domain.Core.Messaging.Data;
 using Supply.Domain.Entities;
 using Supply.Infra.Data.Mappings;
+using System.Threading.Tasks;
 
 namespace Supply.Infra.Data.Context
 {
     public class SupplyDataContext : DbContext, IUnitOfWork
     {
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Veiculo> Veiculo { get; set; }
         public DbSet<VeiculoMarca> VeiculoMarca { get; set; }
 
         public SupplyDataContext(DbContextOptions<SupplyDataContext> options) : base(options) { }
@@ -20,7 +20,7 @@ namespace Supply.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new VehicleMapping());
+            modelBuilder.ApplyConfiguration(new VeiculoMapping());
             modelBuilder.ApplyConfiguration(new VeiculoMarcaMapping());
 
             base.OnModelCreating(modelBuilder);

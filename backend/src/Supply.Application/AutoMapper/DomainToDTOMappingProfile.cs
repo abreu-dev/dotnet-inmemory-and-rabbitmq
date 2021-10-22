@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Supply.Application.DTOs.VehicleDTOs;
+using Supply.Application.DTOs.VeiculoDTOs;
 using Supply.Application.DTOs.VeiculoMarcaDTOs;
 using Supply.Caching.Entities;
 
@@ -9,7 +9,7 @@ namespace Supply.Application.AutoMapper
     {
         public DomainToDTOMappingProfile()
         {
-            CreateMap<VehicleCache, VehicleDTO>();
+            CreateMap<VeiculoCache, VeiculoDTO>();
             CreateMap<VeiculoMarcaCache, VeiculoMarcaDTO>();
         }
     }

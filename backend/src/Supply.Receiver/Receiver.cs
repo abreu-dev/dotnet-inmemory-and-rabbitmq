@@ -8,7 +8,7 @@ using Serilog;
 using Supply.Domain.Core.Mediator;
 using Supply.Domain.Core.MessageBroker.Options;
 using Supply.Domain.Core.Messaging;
-using Supply.Domain.Events.VehicleEvents;
+using Supply.Domain.Events.VeiculoEvents;
 using Supply.Domain.Events.VeiculoMarcaEvents;
 using Supply.Receiver.Models;
 using System;
@@ -41,9 +41,9 @@ namespace Supply.Receiver
 
             _queueList = new List<QueueInfo>()
             {
-                new QueueInfo(typeof(VehicleAddedEvent)),
-                new QueueInfo(typeof(VehicleUpdatedEvent)),
-                new QueueInfo(typeof(VehicleRemovedEvent)),
+                new QueueInfo(typeof(VeiculoAddedEvent)),
+                new QueueInfo(typeof(VeiculoUpdatedEvent)),
+                new QueueInfo(typeof(VeiculoRemovedEvent)),
                 new QueueInfo(typeof(VeiculoMarcaAddedEvent)),
                 new QueueInfo(typeof(VeiculoMarcaUpdatedEvent)),
                 new QueueInfo(typeof(VeiculoMarcaRemovedEvent))

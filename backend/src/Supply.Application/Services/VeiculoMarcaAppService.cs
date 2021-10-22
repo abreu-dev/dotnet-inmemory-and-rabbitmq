@@ -5,7 +5,6 @@ using Supply.Application.Interfaces;
 using Supply.Caching.Interfaces;
 using Supply.Domain.Commands.VeiculoMarcaCommands;
 using Supply.Domain.Core.Mediator;
-using Supply.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,17 +15,14 @@ namespace Supply.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IMediatorHandler _mediator;
-        private readonly IVeiculoMarcaRepository _veiculoMarcaRepository;
         private readonly IVeiculoMarcaCacheRepository _veiculoMarcaCacheRepository;
 
         public VeiculoMarcaAppService(IMapper mapper,
                                       IMediatorHandler mediator,
-                                      IVeiculoMarcaRepository veiculoMarcaRepository, 
                                       IVeiculoMarcaCacheRepository veiculoMarcaCacheRepository)
         {
             _mapper = mapper;
             _mediator = mediator;
-            _veiculoMarcaRepository = veiculoMarcaRepository;
             _veiculoMarcaCacheRepository = veiculoMarcaCacheRepository;
         }
 

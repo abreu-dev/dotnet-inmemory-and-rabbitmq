@@ -19,16 +19,16 @@ namespace Supply.Infra.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Supply.Domain.Entities.Vehicle", b =>
+            modelBuilder.Entity("Supply.Domain.Entities.Veiculo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Plate")
+                    b.Property<string>("Placa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Plate");
+                        .HasColumnName("Placa");
 
                     b.Property<bool>("Removed")
                         .HasColumnType("bit")
@@ -36,7 +36,7 @@ namespace Supply.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Veiculo");
                 });
 
             modelBuilder.Entity("Supply.Domain.Entities.VeiculoMarca", b =>

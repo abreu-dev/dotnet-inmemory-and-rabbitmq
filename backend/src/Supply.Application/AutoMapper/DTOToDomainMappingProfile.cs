@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Supply.Application.DTOs.VehicleDTOs;
+using Supply.Application.DTOs.VeiculoDTOs;
 using Supply.Application.DTOs.VeiculoMarcaDTOs;
-using Supply.Domain.Commands.VehicleCommands;
+using Supply.Domain.Commands.VeiculoCommands;
 using Supply.Domain.Commands.VeiculoMarcaCommands;
 using System;
 
@@ -11,20 +11,20 @@ namespace Supply.Application.AutoMapper
     {
         public DTOToDomainMappingProfile()
         {
-            CreateVehicleMap();
+            CreateVeiculoMap();
             CreateVeiculoMarcaMap();
         }
 
-        private void CreateVehicleMap()
+        private void CreateVeiculoMap()
         {
-            CreateMap<AddVehicleDTO, AddVehicleCommand>()
-                .ConstructUsing(c => new AddVehicleCommand(c.Plate));
+            CreateMap<AddVeiculoDTO, AddVeiculoCommand>()
+                .ConstructUsing(c => new AddVeiculoCommand(c.Placa));
 
-            CreateMap<UpdateVehicleDTO, UpdateVehicleCommand>()
-                .ConstructUsing(c => new UpdateVehicleCommand(c.Id, c.Plate));
+            CreateMap<UpdateVeiculoDTO, UpdateVeiculoCommand>()
+                .ConstructUsing(c => new UpdateVeiculoCommand(c.Id, c.Placa));
 
-            CreateMap<Guid, RemoveVehicleCommand>()
-                .ConstructUsing(c => new RemoveVehicleCommand(c));
+            CreateMap<Guid, RemoveVeiculoCommand>()
+                .ConstructUsing(c => new RemoveVeiculoCommand(c));
         }
 
         private void CreateVeiculoMarcaMap()

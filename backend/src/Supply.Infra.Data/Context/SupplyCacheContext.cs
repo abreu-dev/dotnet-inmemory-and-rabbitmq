@@ -13,11 +13,11 @@ namespace Supply.Infra.Data.Context
             Database = client.GetDatabase("Supply");
         }
 
-        public IMongoCollection<VehicleCache> VehiclesCache
+        public IMongoCollection<VeiculoCache> VeiculoCache
         {
             get
             {
-                return Database.GetCollection<VehicleCache>("Vehicles");
+                return Database.GetCollection<VeiculoCache>("Veiculo");
             }
         }
 
