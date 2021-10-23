@@ -4,12 +4,12 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Serilog;
 using Supply.Domain.Core.Mediator;
 using Supply.Domain.Core.MessageBroker.Options;
 using Supply.Domain.Core.Messaging;
 using Supply.Domain.Events.VeiculoEvents;
 using Supply.Domain.Events.VeiculoMarcaEvents;
+using Supply.Domain.Events.VeiculoModeloEvents;
 using Supply.Receiver.Models;
 using System;
 using System.Collections.Generic;
@@ -46,7 +46,10 @@ namespace Supply.Receiver
                 new QueueInfo(typeof(VeiculoRemovedEvent)),
                 new QueueInfo(typeof(VeiculoMarcaAddedEvent)),
                 new QueueInfo(typeof(VeiculoMarcaUpdatedEvent)),
-                new QueueInfo(typeof(VeiculoMarcaRemovedEvent))
+                new QueueInfo(typeof(VeiculoMarcaRemovedEvent)),
+                new QueueInfo(typeof(VeiculoModeloAddedEvent)),
+                new QueueInfo(typeof(VeiculoModeloUpdatedEvent)),
+                new QueueInfo(typeof(VeiculoModeloRemovedEvent))
             };
 
             _hostName = rabbitMqOptions.Value.HostName;

@@ -46,7 +46,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_AddVeiculoMarcaCommand_ShouldFailValidation_WhenNomeAlreadyInUse()
         {
             // Arrange
-            var command = new AddVeiculoMarcaCommand("PLA1234");
+            var command = new AddVeiculoMarcaCommand("Marca");
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoMarca, bool>>>()))
@@ -61,13 +61,11 @@ namespace Supply.Domain.Tests.CommandHandlers
             Assert.Equal(DomainMessages.AlreadyInUse.Format("Nome").Message, validationResult.Errors.First().ErrorMessage);
         }
 
-        [Theory]
-        [InlineData("ABC1D23")]
-        [InlineData("ABC1234")]
-        public async Task Handle_AddVeiculoMarcaCommand_ShouldAddAndCommit_WhenValid(string Nome)
+        [Fact]
+        public async Task Handle_AddVeiculoMarcaCommand_ShouldAddAndCommit_WhenValid()
         {
             // Arrange
-            var command = new AddVeiculoMarcaCommand(Nome);
+            var command = new AddVeiculoMarcaCommand("Marca");
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoMarca, bool>>>()))
@@ -98,7 +96,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoMarcaCommand_ShouldFailValidation_WhenEmptyId()
         {
             // Arrange
-            var command = new UpdateVeiculoMarcaCommand(Guid.Empty, "PLA1234");
+            var command = new UpdateVeiculoMarcaCommand(Guid.Empty, "Marca");
 
             // Act
             var validationResult = await _veiculoMarcaCommandHandler.Handle(command, CancellationToken.None);
@@ -128,7 +126,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoMarcaCommand_ShouldFailValidation_WhenVeiculoMarcaNotFound()
         {
             // Arrange
-            var command = new UpdateVeiculoMarcaCommand(Guid.NewGuid(), "PLA1234");
+            var command = new UpdateVeiculoMarcaCommand(Guid.NewGuid(), "Marca");
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoMarca, bool>>>()))
@@ -151,7 +149,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoMarcaCommand_ShouldFailValidation_WhenNomeAlreadyInUse()
         {
             // Arrange
-            var command = new UpdateVeiculoMarcaCommand(Guid.NewGuid(), "PLA1234");
+            var command = new UpdateVeiculoMarcaCommand(Guid.NewGuid(), "Marca");
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoMarca, bool>>>()))
@@ -159,7 +157,7 @@ namespace Supply.Domain.Tests.CommandHandlers
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new VeiculoMarca(command.AggregateId, "PLA7946"));
+                .ReturnsAsync(new VeiculoMarca(command.AggregateId, "Outra Marca"));
 
             // Act
             var validationResult = await _veiculoMarcaCommandHandler.Handle(command, CancellationToken.None);
@@ -170,13 +168,11 @@ namespace Supply.Domain.Tests.CommandHandlers
             Assert.Equal(DomainMessages.AlreadyInUse.Format("Nome").Message, validationResult.Errors.First().ErrorMessage);
         }
 
-        [Theory]
-        [InlineData("ABC1D23")]
-        [InlineData("ABC1234")]
-        public async Task Handle_UpdateVeiculoMarcaCommand_ShouldUpdateAndCommit_WhenValid(string Nome)
+        [Fact]
+        public async Task Handle_UpdateVeiculoMarcaCommand_ShouldUpdateAndCommit_WhenValid()
         {
             // Arrange
-            var command = new UpdateVeiculoMarcaCommand(Guid.NewGuid(), Nome);
+            var command = new UpdateVeiculoMarcaCommand(Guid.NewGuid(), "Marca");
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoMarca, bool>>>()))
@@ -184,7 +180,7 @@ namespace Supply.Domain.Tests.CommandHandlers
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new VeiculoMarca(command.AggregateId, "PLA7946"));
+                .ReturnsAsync(new VeiculoMarca(command.AggregateId, "Outra Marca"));
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.UnitOfWork).Returns(_autoMocker.GetMock<IUnitOfWork>().Object);
@@ -229,7 +225,7 @@ namespace Supply.Domain.Tests.CommandHandlers
             var command = new RemoveVeiculoMarcaCommand(Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
-                .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
+                .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
                 .ReturnsAsync((VeiculoMarca)null);
 
             // Act
@@ -241,17 +237,36 @@ namespace Supply.Domain.Tests.CommandHandlers
             Assert.Equal(DomainMessages.NotFound.Format("VeiculoMarca").Message, validationResult.Errors.First().ErrorMessage);
         }
 
-        [Theory]
-        [InlineData("ABC1D23")]
-        [InlineData("ABC1234")]
-        public async Task Handle_RemoveVeiculoMarcaCommand_ShouldRemoveAndCommit_WhenValid(string Nome)
+        [Fact]
+        public async Task Handle_RemoveVeiculoMarcaCommand_ShouldFailValidation_WhenInUseByVeiculoModelo()
+        {
+            // Arrange
+            var command = new RemoveVeiculoMarcaCommand(Guid.NewGuid());
+
+            var marca = new VeiculoMarca(command.AggregateId, "Marca");
+            marca.VeiculoModelos.Add(new VeiculoModelo("Modelo", marca.Id));
+            _autoMocker.GetMock<IVeiculoMarcaRepository>()
+                .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
+                .ReturnsAsync(marca);
+
+            // Act
+            var validationResult = await _veiculoMarcaCommandHandler.Handle(command, CancellationToken.None);
+
+            // Assert
+            Assert.False(validationResult.IsValid);
+            Assert.Single(validationResult.Errors);
+            Assert.Equal(DomainMessages.InUseByAnotherEntity.Format("VeiculoMarca", "VeiculoModelos").Message, validationResult.Errors.First().ErrorMessage);
+        }
+
+        [Fact]
+        public async Task Handle_RemoveVeiculoMarcaCommand_ShouldRemoveAndCommit_WhenValid()
         {
             // Arrange
             var command = new RemoveVeiculoMarcaCommand(Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
-                .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new VeiculoMarca(command.AggregateId, "PLA7946"));
+                .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
+                .ReturnsAsync(new VeiculoMarca(command.AggregateId, "Marca"));
 
             _autoMocker.GetMock<IVeiculoMarcaRepository>()
                 .Setup(x => x.UnitOfWork).Returns(_autoMocker.GetMock<IUnitOfWork>().Object);

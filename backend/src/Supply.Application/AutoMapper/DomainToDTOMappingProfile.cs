@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Supply.Application.DTOs.VeiculoDTOs;
 using Supply.Application.DTOs.VeiculoMarcaDTOs;
+using Supply.Application.DTOs.VeiculoModeloDTOs;
 using Supply.Caching.Entities;
 
 namespace Supply.Application.AutoMapper
@@ -11,6 +12,7 @@ namespace Supply.Application.AutoMapper
         {
             CreateMap<VeiculoCache, VeiculoDTO>();
             CreateMap<VeiculoMarcaCache, VeiculoMarcaDTO>();
+            CreateMap<VeiculoModeloCache, VeiculoModeloDTO>();
         }
     }
 }

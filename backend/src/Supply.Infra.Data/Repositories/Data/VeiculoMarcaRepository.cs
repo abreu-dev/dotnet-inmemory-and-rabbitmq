@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Supply.Domain.Core.Messaging.Data;
 using Supply.Domain.Entities;
 using Supply.Domain.Interfaces;
 using Supply.Infra.Data.Context;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Supply.Infra.Data.Repositories.Data
 {
@@ -27,6 +27,11 @@ namespace Supply.Infra.Data.Repositories.Data
             return _supplyContext.VeiculoMarca.AsNoTracking().Where(x => !x.Removed);
         }
 
+        private IQueryable<VeiculoMarca> IncludeQuery()
+        {
+            return Query().Include(x => x.VeiculoModelos.Where(w => !w.Removed));
+        }
+
         public async Task<IEnumerable<VeiculoMarca>> GetAll()
         {
             return await Query().ToListAsync();
@@ -40,6 +45,11 @@ namespace Supply.Infra.Data.Repositories.Data
         public async Task<VeiculoMarca> GetById(Guid id)
         {
             return await Query().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<VeiculoMarca> GetByIdWithIncludes(Guid id)
+        {
+            return await IncludeQuery().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void Add(VeiculoMarca veiculoMarca)
