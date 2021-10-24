@@ -14,6 +14,7 @@ namespace Supply.Domain.Interfaces
         Task<IEnumerable<Veiculo>> GetAll();
         Task<IEnumerable<Veiculo>> Search(Expression<Func<Veiculo, bool>> predicate);
         Task<Veiculo> GetById(Guid id);
+        Task<Veiculo> GetByIdWithIncludes(Guid id);
 
         void Add(Veiculo veiculo);
         void Update(Veiculo veiculo);

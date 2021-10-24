@@ -6,5 +6,6 @@ namespace Supply.Application.DTOs.VeiculoDTOs
     {
         public Guid Id { get; set; }
         public string Placa { get; set; }
+        public Guid VeiculoModeloId { get; set; }
     }
 }

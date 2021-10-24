@@ -91,10 +91,16 @@ namespace Supply.Domain.CommandHandlers
                 return request.ValidationResult;
             }
 
-            var veiculoMarca = await _veiculoMarcaRepository.GetById(request.AggregateId);
+            var veiculoMarca = await _veiculoMarcaRepository.GetByIdWithIncludes(request.AggregateId);
             if (veiculoMarca == null)
             {
                 AddError(DomainMessages.NotFound.Format("VeiculoMarca").Message);
+                return ValidationResult;
+            }
+
+            if (veiculoMarca.VeiculoModelos.Any())
+            {
+                AddError(DomainMessages.InUseByAnotherEntity.Format("VeiculoMarca", "VeiculoModelos").Message);
                 return ValidationResult;
             }
 

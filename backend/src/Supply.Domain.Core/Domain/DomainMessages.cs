@@ -7,5 +7,6 @@
         public static DomainMessage AlreadyInUse => new DomainMessage("The informed {0} is already in use.");
         public static DomainMessage InvalidFormat => new DomainMessage("The informed {0} is invalid.");
         public static DomainMessage NotFound => new DomainMessage("The informed {0} was not found.");
+        public static DomainMessage InUseByAnotherEntity => new DomainMessage("The informed {0} is in use by {1}.");
     }
 }

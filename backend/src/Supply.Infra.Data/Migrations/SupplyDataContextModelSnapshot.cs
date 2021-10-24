@@ -34,7 +34,12 @@ namespace Supply.Infra.Data.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("Removed");
 
+                    b.Property<Guid>("VeiculoModeloId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VeiculoModeloId");
 
                     b.ToTable("Veiculo");
                 });
@@ -57,6 +62,63 @@ namespace Supply.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VeiculoMarca");
+                });
+
+            modelBuilder.Entity("Supply.Domain.Entities.VeiculoModelo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Nome");
+
+                    b.Property<bool>("Removed")
+                        .HasColumnType("bit")
+                        .HasColumnName("Removed");
+
+                    b.Property<Guid>("VeiculoMarcaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VeiculoMarcaId");
+
+                    b.ToTable("VeiculoModelo");
+                });
+
+            modelBuilder.Entity("Supply.Domain.Entities.Veiculo", b =>
+                {
+                    b.HasOne("Supply.Domain.Entities.VeiculoModelo", "VeiculoModelo")
+                        .WithMany("Veiculos")
+                        .HasForeignKey("VeiculoModeloId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VeiculoModelo");
+                });
+
+            modelBuilder.Entity("Supply.Domain.Entities.VeiculoModelo", b =>
+                {
+                    b.HasOne("Supply.Domain.Entities.VeiculoMarca", "VeiculoMarca")
+                        .WithMany("VeiculoModelos")
+                        .HasForeignKey("VeiculoMarcaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VeiculoMarca");
+                });
+
+            modelBuilder.Entity("Supply.Domain.Entities.VeiculoMarca", b =>
+                {
+                    b.Navigation("VeiculoModelos");
+                });
+
+            modelBuilder.Entity("Supply.Domain.Entities.VeiculoModelo", b =>
+                {
+                    b.Navigation("Veiculos");
                 });
 #pragma warning restore 612, 618
         }

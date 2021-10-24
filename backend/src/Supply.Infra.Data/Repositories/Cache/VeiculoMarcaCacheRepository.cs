@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Supply.Caching.Entities;
 using Supply.Caching.Interfaces;
 using Supply.Infra.Data.Context;
+using System;
+using System.Collections.Generic;
 
 namespace Supply.Infra.Data.Repositories.Cache
 {
