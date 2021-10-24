@@ -19,13 +19,16 @@ namespace Supply.Domain.CommandHandlers
         IRequestHandler<RemoveVeiculoCommand, ValidationResult>
     {
         private readonly IMessageBrokerBus _messageBrokerBus;
-        private readonly IVeiculoRepository _VeiculoRepository;
+        private readonly IVeiculoRepository _veiculoRepository;
+        private readonly IVeiculoModeloRepository _veiculoModeloRepository;
 
-        public VeiculoCommandHandler(IMessageBrokerBus messageBrokerBus, 
-                                     IVeiculoRepository VeiculoRepository)
+        public VeiculoCommandHandler(IMessageBrokerBus messageBrokerBus,
+                                     IVeiculoRepository VeiculoRepository, 
+                                     IVeiculoModeloRepository veiculoModeloRepository)
         {
             _messageBrokerBus = messageBrokerBus;
-            _VeiculoRepository = VeiculoRepository;
+            _veiculoRepository = VeiculoRepository;
+            _veiculoModeloRepository = veiculoModeloRepository;
         }
 
         public async Task<ValidationResult> Handle(AddVeiculoCommand request, CancellationToken cancellationToken)
@@ -35,17 +38,23 @@ namespace Supply.Domain.CommandHandlers
                 return request.ValidationResult;
             }
 
-            var veiculo = new Veiculo(request.Placa);
+            var veiculo = new Veiculo(request.Placa, request.VeiculoModeloId);
 
-            if ((await _VeiculoRepository.Search(x => x.Placa == veiculo.Placa)).Any())
+            if ((await _veiculoRepository.Search(x => x.Placa == veiculo.Placa)).Any())
             {
                 AddError(DomainMessages.AlreadyInUse.Format("Placa").Message);
                 return ValidationResult;
             }
 
-            _VeiculoRepository.Add(veiculo);
+            if (!(await _veiculoModeloRepository.Search(x => x.Id == veiculo.VeiculoModeloId)).Any())
+            {
+                AddError(DomainMessages.NotFound.Format("VeiculoModeloId").Message);
+                return ValidationResult;
+            }
 
-            if (await Commit(_VeiculoRepository.UnitOfWork))
+            _veiculoRepository.Add(veiculo);
+
+            if (await Commit(_veiculoRepository.UnitOfWork))
             {
                 await _messageBrokerBus.PublishEvent(new VeiculoAddedEvent(veiculo.Id));
             }
@@ -60,23 +69,30 @@ namespace Supply.Domain.CommandHandlers
                 return request.ValidationResult;
             }
 
-            var veiculo = await _VeiculoRepository.GetById(request.AggregateId);
+            var veiculo = await _veiculoRepository.GetById(request.AggregateId);
             if (veiculo == null)
             {
                 AddError(DomainMessages.NotFound.Format("Veiculo").Message);
                 return ValidationResult;
             }
 
-            if ((await _VeiculoRepository.Search(x => x.Placa == request.Placa && x.Id != request.AggregateId)).Any())
+            if ((await _veiculoRepository.Search(x => x.Placa == request.Placa && x.Id != request.AggregateId)).Any())
             {
                 AddError(DomainMessages.AlreadyInUse.Format("Placa").Message);
                 return ValidationResult;
             }
 
-            veiculo.UpdatePlaca(request.Placa);
-            _VeiculoRepository.Update(veiculo);
+            if (!(await _veiculoModeloRepository.Search(x => x.Id == veiculo.VeiculoModeloId)).Any())
+            {
+                AddError(DomainMessages.NotFound.Format("VeiculoModeloId").Message);
+                return ValidationResult;
+            }
 
-            if (await Commit(_VeiculoRepository.UnitOfWork))
+            veiculo.UpdatePlaca(request.Placa);
+            veiculo.UpdateVeiculoModeloId(request.VeiculoModeloId);
+            _veiculoRepository.Update(veiculo);
+
+            if (await Commit(_veiculoRepository.UnitOfWork))
             {
                 await _messageBrokerBus.PublishEvent(new VeiculoUpdatedEvent(veiculo.Id));
             }
@@ -91,16 +107,16 @@ namespace Supply.Domain.CommandHandlers
                 return request.ValidationResult;
             }
 
-            var veiculo = await _VeiculoRepository.GetById(request.AggregateId);
+            var veiculo = await _veiculoRepository.GetById(request.AggregateId);
             if (veiculo == null)
             {
                 AddError(DomainMessages.NotFound.Format("Veiculo").Message);
                 return ValidationResult;
             }
 
-            _VeiculoRepository.Remove(veiculo);
+            _veiculoRepository.Remove(veiculo);
 
-            if (await Commit(_VeiculoRepository.UnitOfWork))
+            if (await Commit(_veiculoRepository.UnitOfWork))
             {
                 await _messageBrokerBus.PublishEvent(new VeiculoRemovedEvent(request.AggregateId));
             }

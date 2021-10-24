@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Supply.Caching.Entities;
 using Supply.Caching.Interfaces;
+using Supply.Domain.Core.MessageBroker;
+using Supply.Domain.Events.VeiculoEvents;
 using Supply.Domain.Events.VeiculoModeloEvents;
 using Supply.Domain.Interfaces;
 using System.Threading;
@@ -13,12 +15,15 @@ namespace Supply.Infra.Data.EventHandlers
         INotificationHandler<VeiculoModeloUpdatedEvent>,
         INotificationHandler<VeiculoModeloRemovedEvent>
     {
+        private readonly IMessageBrokerBus _messageBrokerBus;
         private readonly IVeiculoModeloRepository _veiculoModeloRepository;
         private readonly IVeiculoModeloCacheRepository _veiculoModeloCacheRepository;
 
-        public VeiculoModeloEventHandler(IVeiculoModeloRepository veiculoModeloRepository, 
+        public VeiculoModeloEventHandler(IMessageBrokerBus messageBrokerBus, 
+                                         IVeiculoModeloRepository veiculoModeloRepository, 
                                          IVeiculoModeloCacheRepository veiculoModeloCacheRepository)
         {
+            _messageBrokerBus = messageBrokerBus;
             _veiculoModeloRepository = veiculoModeloRepository;
             _veiculoModeloCacheRepository = veiculoModeloCacheRepository;
         }
@@ -29,7 +34,7 @@ namespace Supply.Infra.Data.EventHandlers
             var veiculoModeloCache = new VeiculoModeloCache(veiculoModelo.Id, 
                                                             veiculoModelo.Nome, 
                                                             veiculoModelo.VeiculoMarcaId,
-                                                            veiculoModelo.VeiculoMarca?.Nome);
+                                                            veiculoModelo.VeiculoMarca.Nome);
 
             _veiculoModeloCacheRepository.Add(veiculoModeloCache);
         }
@@ -40,9 +45,14 @@ namespace Supply.Infra.Data.EventHandlers
             var veiculoModeloCache = new VeiculoModeloCache(veiculoModelo.Id,
                                                             veiculoModelo.Nome,
                                                             veiculoModelo.VeiculoMarcaId,
-                                                            veiculoModelo.VeiculoMarca?.Nome);
+                                                            veiculoModelo.VeiculoMarca.Nome);
 
             _veiculoModeloCacheRepository.Update(veiculoModeloCache);
+
+            foreach (var veiculo in veiculoModelo.Veiculos)
+            {
+                await _messageBrokerBus.PublishEvent(new VeiculoUpdatedEvent(veiculo.Id));
+            }
         }
 
         public async Task Handle(VeiculoModeloRemovedEvent notification, CancellationToken cancellationToken)

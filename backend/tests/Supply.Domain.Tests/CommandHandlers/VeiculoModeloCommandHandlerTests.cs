@@ -314,7 +314,7 @@ namespace Supply.Domain.Tests.CommandHandlers
             var command = new RemoveVeiculoModeloCommand(Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoModeloRepository>()
-                .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
+                .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
                 .ReturnsAsync((VeiculoModelo)null);
 
             // Act
@@ -327,13 +327,34 @@ namespace Supply.Domain.Tests.CommandHandlers
         }
 
         [Fact]
+        public async Task Handle_RemoveVeiculoModeloCommand_ShouldFailValidation_WhenInUseByVeiculo()
+        {
+            // Arrange
+            var command = new RemoveVeiculoModeloCommand(Guid.NewGuid());
+
+            var modelo = new VeiculoModelo(command.AggregateId, "Marca", Guid.NewGuid());
+            modelo.Veiculos.Add(new Veiculo("PLA1234", modelo.Id));
+            _autoMocker.GetMock<IVeiculoModeloRepository>()
+                .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
+                .ReturnsAsync(modelo);
+
+            // Act
+            var validationResult = await _veiculoModeloCommandHandler.Handle(command, CancellationToken.None);
+
+            // Assert
+            Assert.False(validationResult.IsValid);
+            Assert.Single(validationResult.Errors);
+            Assert.Equal(DomainMessages.InUseByAnotherEntity.Format("VeiculoModelo", "Veiculos").Message, validationResult.Errors.First().ErrorMessage);
+        }
+
+        [Fact]
         public async Task Handle_RemoveVeiculoModeloCommand_ShouldRemoveAndCommit_WhenValid()
         {
             // Arrange
             var command = new RemoveVeiculoModeloCommand(Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoModeloRepository>()
-                .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
+                .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
                 .ReturnsAsync(new VeiculoModelo(command.AggregateId, "Modelo", Guid.NewGuid()));
 
             _autoMocker.GetMock<IVeiculoModeloRepository>()

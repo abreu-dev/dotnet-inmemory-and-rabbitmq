@@ -18,6 +18,10 @@ namespace Supply.Infra.Data.Mappings
 
             builder.Property(x => x.Removed)
                 .HasColumnName("Removed");
+
+            builder.HasOne(x => x.VeiculoModelo)
+                .WithMany(x => x.Veiculos)
+                .IsRequired();
         }
     }
 }

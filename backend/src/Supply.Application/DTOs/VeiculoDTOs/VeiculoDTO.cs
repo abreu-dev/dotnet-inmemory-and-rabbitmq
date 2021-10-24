@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supply.Application.DTOs.VeiculoModeloDTOs;
+using System;
 
 namespace Supply.Application.DTOs.VeiculoDTOs
 {
@@ -6,5 +7,6 @@ namespace Supply.Application.DTOs.VeiculoDTOs
     {
         public Guid Id { get; set; }
         public string Placa { get; set; }
+        public VeiculoModeloDTO VeiculoModelo { get; set; }
     }
 }

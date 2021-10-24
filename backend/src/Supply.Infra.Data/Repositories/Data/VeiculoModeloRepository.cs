@@ -29,7 +29,9 @@ namespace Supply.Infra.Data.Repositories.Data
 
         private IQueryable<VeiculoModelo> IncludeQuery()
         {
-            return Query().Include(x => x.VeiculoMarca);
+            return Query()
+                .Include(x => x.VeiculoMarca)
+                .Include(x => x.Veiculos.Where(w => !w.Removed));
         }
 
         public async Task<IEnumerable<VeiculoModelo>> GetAll()

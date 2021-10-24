@@ -21,6 +21,10 @@ namespace Supply.Domain.Validators.VeiculoValidators
                 .Matches("^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$")
                 .WithMessage(DomainMessages.InvalidFormat.Format("Placa").Message)
                 .When(x => !string.IsNullOrEmpty(x.Placa));
+
+            RuleFor(x => x.VeiculoModeloId)
+                .NotEmpty()
+                .WithMessage(DomainMessages.RequiredField.Format("VeiculoModeloId").Message);
         }
     }
 }

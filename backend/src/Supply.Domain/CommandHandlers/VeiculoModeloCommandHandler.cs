@@ -46,7 +46,6 @@ namespace Supply.Domain.CommandHandlers
                 return ValidationResult;
             }
 
-            var teste = await _veiculoMarcaRepository.Search(x => x.Id == veiculoModelo.VeiculoMarcaId);
             if (!(await _veiculoMarcaRepository.Search(x => x.Id == veiculoModelo.VeiculoMarcaId)).Any())
             {
                 AddError(DomainMessages.NotFound.Format("VeiculoMarcaId").Message);
@@ -108,10 +107,16 @@ namespace Supply.Domain.CommandHandlers
                 return request.ValidationResult;
             }
 
-            var veiculoModelo = await _veiculoModeloRepository.GetById(request.AggregateId);
+            var veiculoModelo = await _veiculoModeloRepository.GetByIdWithIncludes(request.AggregateId);
             if (veiculoModelo == null)
             {
                 AddError(DomainMessages.NotFound.Format("VeiculoModelo").Message);
+                return ValidationResult;
+            }
+
+            if (veiculoModelo.Veiculos.Any())
+            {
+                AddError(DomainMessages.InUseByAnotherEntity.Format("VeiculoModelo", "Veiculos").Message);
                 return ValidationResult;
             }
 

@@ -10,7 +10,7 @@ namespace Supply.Caching.Entities
 
         public string Nome { get; set; }
 
-        public VeiculoMarcaCache VeiculoMarca { get;set; }
+        public VeiculoMarcaCache VeiculoMarca { get; set; }
 
         public VeiculoModeloCache(Guid id, string nome, Guid veiculoMarcaId, string veiculoMarcaNome)
         {

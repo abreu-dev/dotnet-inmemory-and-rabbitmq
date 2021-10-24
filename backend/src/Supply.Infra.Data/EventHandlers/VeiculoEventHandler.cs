@@ -25,16 +25,26 @@ namespace Supply.Infra.Data.EventHandlers
 
         public async Task Handle(VeiculoAddedEvent notification, CancellationToken cancellationToken)
         {
-            var veiculo = await _veiculoRepository.GetById(notification.AggregateId);
-            var veiculoCache = new VeiculoCache(veiculo.Id, veiculo.Placa);
+            var veiculo = await _veiculoRepository.GetByIdWithIncludes(notification.AggregateId);
+            var veiculoCache = new VeiculoCache(veiculo.Id,
+                                                veiculo.Placa,
+                                                veiculo.VeiculoModeloId,
+                                                veiculo.VeiculoModelo.Nome,
+                                                veiculo.VeiculoModelo.VeiculoMarcaId,
+                                                veiculo.VeiculoModelo.VeiculoMarca.Nome);
 
             _veiculoCacheRepository.Add(veiculoCache);
         }
 
         public async Task Handle(VeiculoUpdatedEvent notification, CancellationToken cancellationToken)
         {
-            var veiculo = await _veiculoRepository.GetById(notification.AggregateId);
-            var veiculoCache = new VeiculoCache(veiculo.Id, veiculo.Placa);
+            var veiculo = await _veiculoRepository.GetByIdWithIncludes(notification.AggregateId);
+            var veiculoCache = new VeiculoCache(veiculo.Id, 
+                                                veiculo.Placa, 
+                                                veiculo.VeiculoModeloId,
+                                                veiculo.VeiculoModelo.Nome,
+                                                veiculo.VeiculoModelo.VeiculoMarcaId,
+                                                veiculo.VeiculoModelo.VeiculoMarca.Nome);
 
             _veiculoCacheRepository.Update(veiculoCache);
         }

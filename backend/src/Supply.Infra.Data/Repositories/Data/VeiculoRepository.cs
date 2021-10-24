@@ -27,6 +27,13 @@ namespace Supply.Infra.Data.Repositories.Data
             return _supplyContext.Veiculo.AsNoTracking().Where(x => !x.Removed);
         }
 
+        private IQueryable<Veiculo> IncludeQuery()
+        {
+            return Query()
+                .Include(x => x.VeiculoModelo)
+                .ThenInclude(x => x.VeiculoMarca);
+        }
+
         public async Task<IEnumerable<Veiculo>> GetAll()
         {
             return await Query().ToListAsync();
@@ -40,6 +47,11 @@ namespace Supply.Infra.Data.Repositories.Data
         public async Task<Veiculo> GetById(Guid id)
         {
             return await Query().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Veiculo> GetByIdWithIncludes(Guid id)
+        {
+            return await IncludeQuery().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void Add(Veiculo veiculo)
