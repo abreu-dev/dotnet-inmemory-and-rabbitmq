@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Gerenciar <b>Marcas de Veículo</b></h3>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" (click)="showAddVeiculoMarcaModal()">
+              <span>Adicionar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <td>Nome</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let veiculoMarca of veiculoMarcas">
+            <td>{{ veiculoMarca.id }}</td>
+            <td>{{ veiculoMarca.nome }}</td>
+            <td>
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <button class="btn btn-primary btn-sm" (click)="showViewVeiculoMarcaModal(veiculoMarca)" type="button">
+                    <i class="fa fa-table"></i>
+                  </button>
+                </li>
+                <li class="list-inline-item">
+                  <button class="btn btn-success btn-sm" (click)="showUpdateVeiculoMarcaModal(veiculoMarca)" type="button">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </li>
+                <li class="list-inline-item">
+                  <button class="btn btn-danger btn-sm" (click)="showRemoveVeiculoMarcaModal(veiculoMarca)" type="button">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,3 @@
 export const masks = {
-    plate: "SSS-0A00"
-}
+  placa: "SSS-0A00",
+};
