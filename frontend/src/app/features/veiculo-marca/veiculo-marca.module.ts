@@ -13,7 +13,7 @@ import { VeiculoMarcaRoutingModule } from "./veiculo-marca-routing.module";
 
 @NgModule({
   declarations: [VeiculoMarcaListComponent, AddVeiculoMarcaComponent, UpdateVeiculoMarcaComponent, ViewVeiculoMarcaComponent, RemoveVeiculoMarcaComponent],
-  imports: [CommonModule, RouterModule, VeiculoMarcaRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, VeiculoMarcaRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
   providers: [VeiculoMarcaService],
 })
 export class VeiculoMarcaModule {}

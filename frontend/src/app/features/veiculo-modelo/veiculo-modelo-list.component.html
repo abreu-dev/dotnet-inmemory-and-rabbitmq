@@ -18,6 +18,7 @@
           <tr>
             <th>Id</th>
             <td>Nome</td>
+            <td>Marca</td>
             <td></td>
           </tr>
         </thead>
@@ -25,6 +26,7 @@
           <tr *ngFor="let veiculoModelo of veiculoModelos">
             <td>{{ veiculoModelo.id }}</td>
             <td>{{ veiculoModelo.nome }}</td>
+            <td>{{ veiculoModelo.veiculoMarca.nome }}</td>
             <td>
               <ul class="list-inline">
                 <li class="list-inline-item">
