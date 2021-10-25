@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">Novo Veículo</h4>
+  <h4 class="modal-title pull-left">Novo Modelo de Veículo</h4>
 </div>
 <div class="modal-body">
   <div class="alert alert-danger" *ngIf="errors.length > 0">
@@ -10,16 +10,7 @@
       <form [formGroup]="form">
         <div class="form-group">
           <div class="col-md-10">
-            <input
-              class="form-control"
-              id="placa"
-              type="text"
-              placeholder="Placa (Obrigatório)"
-              formControlName="placa"
-              [class.is-valid]="placa && placa.valid"
-              [class.is-invalid]="placa && placa.touched && placa.invalid"
-              [mask]="plateMask"
-            />
+            <input class="form-control" id="nome" type="text" placeholder="Nome (Obrigatório)" formControlName="nome" [class.is-valid]="nome && nome.valid" [class.is-invalid]="nome && nome.touched && nome.invalid" />
           </div>
         </div>
       </form>

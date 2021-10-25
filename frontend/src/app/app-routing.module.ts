@@ -15,6 +15,14 @@ const routes: Routes = [
     path: "veiculos",
     loadChildren: () => import("./features/veiculo/veiculo.module").then((m) => m.VeiculoModule),
   },
+  {
+    path: "marcas-de-veiculo",
+    loadChildren: () => import("./features/veiculo-marca/veiculo-marca.module").then((m) => m.VeiculoMarcaModule),
+  },
+  {
+    path: "modelos-de-veiculo",
+    loadChildren: () => import("./features/veiculo-modelo/veiculo-modelo.module").then((m) => m.VeiculoModeloModule),
+  },
 ];
 
 @NgModule({

@@ -13,21 +13,8 @@ import { VeiculoRoutingModule } from "./veiculo-routing.module";
 import { NgxMaskModule } from "ngx-mask";
 
 @NgModule({
-  declarations: [
-    VeiculoListComponent,
-    AddVeiculoComponent,
-    UpdateVeiculoComponent,
-    ViewVeiculoComponent,
-    RemoveVeiculoComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    VeiculoRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxMaskModule.forChild(),
-  ],
+  declarations: [VeiculoListComponent, AddVeiculoComponent, UpdateVeiculoComponent, ViewVeiculoComponent, RemoveVeiculoComponent],
+  imports: [CommonModule, RouterModule, VeiculoRoutingModule, FormsModule, ReactiveFormsModule, NgxMaskModule.forChild()],
   providers: [VeiculoService],
 })
 export class VeiculoModule {}

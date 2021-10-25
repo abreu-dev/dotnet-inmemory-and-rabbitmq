@@ -4,10 +4,10 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-6">
-            <h3>Gerenciar <b>Veículos</b></h3>
+            <h3>Gerenciar <b>Modelos de Veículo</b></h3>
           </div>
           <div class="col-sm-6">
-            <a class="btn btn-success" (click)="showAddVeiculoModal()">
+            <a class="btn btn-success" (click)="showAddVeiculoModeloModal()">
               <span>Adicionar</span>
             </a>
           </div>
@@ -17,28 +17,28 @@
         <thead>
           <tr>
             <th>Id</th>
-            <td>Placa</td>
+            <td>Nome</td>
             <td></td>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let veiculo of veiculos">
-            <td>{{ veiculo.id }}</td>
-            <td>{{ veiculo.placa | mask: plateMask }}</td>
+          <tr *ngFor="let veiculoModelo of veiculoModelos">
+            <td>{{ veiculoModelo.id }}</td>
+            <td>{{ veiculoModelo.nome }}</td>
             <td>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <button class="btn btn-primary btn-sm" (click)="showViewVeiculoModal(veiculo)" type="button">
+                  <button class="btn btn-primary btn-sm" (click)="showViewVeiculoModeloModal(veiculoModelo)" type="button">
                     <i class="fa fa-table"></i>
                   </button>
                 </li>
                 <li class="list-inline-item">
-                  <button class="btn btn-success btn-sm" (click)="showUpdateVeiculoModal(veiculo)" type="button">
+                  <button class="btn btn-success btn-sm" (click)="showUpdateVeiculoModeloModal(veiculoModelo)" type="button">
                     <i class="fa fa-edit"></i>
                   </button>
                 </li>
                 <li class="list-inline-item">
-                  <button class="btn btn-danger btn-sm" (click)="showRemoveVeiculoModal(veiculo)" type="button">
+                  <button class="btn btn-danger btn-sm" (click)="showRemoveVeiculoModeloModal(veiculoModelo)" type="button">
                     <i class="fa fa-trash"></i>
                   </button>
                 </li>

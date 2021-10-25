@@ -9,6 +9,8 @@ import { NgxMaskModule } from "ngx-mask";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
+import { VeiculoMarcaService } from "./features/veiculo-marca/shared/services/veiculo-marca.service";
+import { VeiculoModeloService } from "./features/veiculo-modelo/shared/services/veiculo-modelo.service";
 import { VeiculoService } from "./features/veiculo/shared/services/veiculo.service";
 
 @NgModule({
@@ -25,7 +27,7 @@ import { VeiculoService } from "./features/veiculo/shared/services/veiculo.servi
       dropSpecialCharacters: true,
     }),
   ],
-  providers: [BsModalService, VeiculoService],
+  providers: [BsModalService, VeiculoService, VeiculoMarcaService, VeiculoModeloService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
