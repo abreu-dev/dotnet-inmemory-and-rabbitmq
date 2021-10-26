@@ -2,10 +2,10 @@
   {{ r.nome }}
 </ng-template>
 <input
-  id="veiculo-marca-typeahead"
+  id="veiculo-modelo-typeahead"
   type="text"
   class="form-control"
-  placeholder="Marca de Veículo"
+  placeholder="Modelo de Veículo"
   [class.is-valid]="control && control.valid"
   [class.is-invalid]="control && control.touched && control.invalid"
   [ngbTypeahead]="search"

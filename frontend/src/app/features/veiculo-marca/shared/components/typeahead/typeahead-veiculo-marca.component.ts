@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, FormControl } from "@angular/forms";
 import { NgbTypeaheadSelectItemEvent } from "@ng-bootstrap/ng-bootstrap";
 
 import { Observable, Subscription, timer } from "rxjs";
@@ -13,7 +13,7 @@ import { VeiculoMarcaService } from "../../services/veiculo-marca.service";
 })
 export class TypeaheadVeiculoMarcaComponent implements OnInit {
   @Input()
-  public control!: AbstractControl | null;
+  public control!: FormControl;
   public model: any;
   public veiculoMarcas: VeiculoMarca[] = [];
 

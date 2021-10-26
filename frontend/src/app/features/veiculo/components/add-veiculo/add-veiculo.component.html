@@ -20,6 +20,8 @@
               [class.is-invalid]="placa && placa.touched && placa.invalid"
               [mask]="plateMask"
             />
+            <br />
+            <app-typeahead-veiculo-modelo [control]="veiculoModelo"></app-typeahead-veiculo-modelo>
           </div>
         </div>
       </form>

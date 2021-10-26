@@ -11,10 +11,13 @@ import { VeiculoModeloService } from "./shared/services/veiculo-modelo.service";
 import { VeiculoModeloListComponent } from "./veiculo-modelo-list.component";
 import { VeiculoModeloRoutingModule } from "./veiculo-modelo-routing.module";
 import { VeiculoMarcaModule } from "../veiculo-marca/veiculo-marca.module";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { TypeaheadVeiculoModeloComponent } from "./shared/components/typeahead/typeahead-veiculo-modelo.component";
 
 @NgModule({
-  declarations: [VeiculoModeloListComponent, AddVeiculoModeloComponent, UpdateVeiculoModeloComponent, ViewVeiculoModeloComponent, RemoveVeiculoModeloComponent],
-  imports: [CommonModule, RouterModule, VeiculoModeloRoutingModule, FormsModule, ReactiveFormsModule, VeiculoMarcaModule],
+  declarations: [VeiculoModeloListComponent, AddVeiculoModeloComponent, UpdateVeiculoModeloComponent, ViewVeiculoModeloComponent, RemoveVeiculoModeloComponent, TypeaheadVeiculoModeloComponent],
+  imports: [CommonModule, RouterModule, VeiculoModeloRoutingModule, FormsModule, ReactiveFormsModule, VeiculoMarcaModule, NgbModule],
   providers: [VeiculoModeloService],
+  exports: [TypeaheadVeiculoModeloComponent],
 })
 export class VeiculoModeloModule {}

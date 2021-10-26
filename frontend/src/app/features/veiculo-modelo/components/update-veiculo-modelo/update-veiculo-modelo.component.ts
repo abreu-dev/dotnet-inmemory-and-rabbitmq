@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
@@ -32,7 +32,7 @@ export class UpdateVeiculoModeloComponent implements OnInit {
   }
 
   public get veiculoMarca() {
-    return this.form.get("veiculoMarca");
+    return this.form.get("veiculoMarca") as FormControl;
   }
 
   public confirm(): void {

@@ -4,4 +4,5 @@ export interface Veiculo {
   id: string;
   placa: string;
   veiculoModelo: VeiculoModelo;
+  veiculoModeloId: string;
 }
