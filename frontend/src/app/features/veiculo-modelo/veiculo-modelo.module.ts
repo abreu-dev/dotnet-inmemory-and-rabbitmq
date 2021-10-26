@@ -10,10 +10,11 @@ import { RemoveVeiculoModeloComponent } from "./components/remove-veiculo-modelo
 import { VeiculoModeloService } from "./shared/services/veiculo-modelo.service";
 import { VeiculoModeloListComponent } from "./veiculo-modelo-list.component";
 import { VeiculoModeloRoutingModule } from "./veiculo-modelo-routing.module";
+import { VeiculoMarcaModule } from "../veiculo-marca/veiculo-marca.module";
 
 @NgModule({
   declarations: [VeiculoModeloListComponent, AddVeiculoModeloComponent, UpdateVeiculoModeloComponent, ViewVeiculoModeloComponent, RemoveVeiculoModeloComponent],
-  imports: [CommonModule, RouterModule, VeiculoModeloRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, VeiculoModeloRoutingModule, FormsModule, ReactiveFormsModule, VeiculoMarcaModule],
   providers: [VeiculoModeloService],
 })
 export class VeiculoModeloModule {}

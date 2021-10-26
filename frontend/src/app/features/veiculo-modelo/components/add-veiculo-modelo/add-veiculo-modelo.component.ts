@@ -22,11 +22,16 @@ export class AddVeiculoModeloComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
       nome: ["", Validators.required],
+      veiculoMarca: [null, Validators.required],
     });
   }
 
   public get nome() {
     return this.form.get("nome");
+  }
+
+  public get veiculoMarca() {
+    return this.form.get("veiculoMarca");
   }
 
   public confirm(): void {
@@ -37,6 +42,7 @@ export class AddVeiculoModeloComponent implements OnInit {
 
     this.submitting = true;
     this.veiculoModelo = Object.assign({}, this.veiculoModelo, this.form.value);
+    this.veiculoModelo.veiculoMarcaId = this.veiculoModelo.veiculoMarca.id;
     this.veiculoModeloService.add(this.veiculoModelo).subscribe(
       () => {
         this.toastrService.info("Modelo de Veículo adicionado com sucesso, aguarde alguns segundos e ele estará na listagem.");
