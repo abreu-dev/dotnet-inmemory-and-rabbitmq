@@ -10,17 +10,19 @@
       <form [formGroup]="form">
         <div class="form-group">
           <div class="col-md-10">
+            <label for="nome">Placa</label>
             <input
               class="form-control"
               id="placa"
               type="text"
-              placeholder="Placa (Obrigatório)"
+              placeholder="Obrigatório"
               formControlName="placa"
               [class.is-valid]="placa && placa.valid"
               [class.is-invalid]="placa && placa.touched && placa.invalid"
               [mask]="plateMask"
             />
             <br />
+            <label for="nome">Modelo de Veículo</label>
             <app-typeahead-veiculo-modelo [control]="veiculoModelo"></app-typeahead-veiculo-modelo>
           </div>
         </div>

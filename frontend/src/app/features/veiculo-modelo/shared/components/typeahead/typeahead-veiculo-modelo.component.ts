@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, Validators } from "@angular/forms";
 import { NgbTypeaheadSelectItemEvent } from "@ng-bootstrap/ng-bootstrap";
 
 import { Observable } from "rxjs";
@@ -16,6 +16,7 @@ export class TypeaheadVeiculoModeloComponent implements OnInit {
   public control!: FormControl;
   public model: any;
   public veiculoModelos: VeiculoModelo[] = [];
+  public isRequired: boolean = false;
 
   constructor(private veiculoModeloService: VeiculoModeloService) {}
 
@@ -23,6 +24,7 @@ export class TypeaheadVeiculoModeloComponent implements OnInit {
     this.veiculoModeloService.getAll().subscribe((veiculoModelos) => {
       this.veiculoModelos = veiculoModelos;
     });
+    this.isRequired = this.control.hasValidator(Validators.required);
   }
 
   public search = (text$: Observable<string>) =>

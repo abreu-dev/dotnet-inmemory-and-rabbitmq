@@ -5,7 +5,7 @@
   id="veiculo-modelo-typeahead"
   type="text"
   class="form-control"
-  placeholder="Modelo de Veículo"
+  [placeholder]="isRequired ? 'Obrigatório' : ''"
   [class.is-valid]="control && control.valid"
   [class.is-invalid]="control && control.touched && control.invalid"
   [ngbTypeahead]="search"
