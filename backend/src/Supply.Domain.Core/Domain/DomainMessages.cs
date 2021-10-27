@@ -2,11 +2,11 @@
 {
     public class DomainMessages
     {
-        public static DomainMessage CommitFailed => new DomainMessage("There was an error saving data.");
-        public static DomainMessage RequiredField => new DomainMessage("Please, ensure you enter {0}.");
-        public static DomainMessage AlreadyInUse => new DomainMessage("The informed {0} is already in use.");
-        public static DomainMessage InvalidFormat => new DomainMessage("The informed {0} is invalid.");
-        public static DomainMessage NotFound => new DomainMessage("The informed {0} was not found.");
-        public static DomainMessage InUseByAnotherEntity => new DomainMessage("The informed {0} is in use by {1}.");
+        public static DomainMessage CommitFailed => new DomainMessage("Houve um erro ao salvar os dados.");
+        public static DomainMessage RequiredField => new DomainMessage("Por favor, certifique-se de informar o campo {0}.");
+        public static DomainMessage AlreadyInUse => new DomainMessage("O campo {0} informado já está em uso.");
+        public static DomainMessage InvalidFormat => new DomainMessage("O campo {0} informado é inválido.");
+        public static DomainMessage NotFound => new DomainMessage("O campo {0} informado não foi encontrado.");
+        public static DomainMessage InUseByAnotherEntity => new DomainMessage("O campo {0} informado é usado em {1}.");
     }
 }
