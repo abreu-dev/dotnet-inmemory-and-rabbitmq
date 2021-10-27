@@ -10,7 +10,8 @@
       <form [formGroup]="form">
         <div class="form-group">
           <div class="col-md-10">
-            <input class="form-control" id="nome" type="text" placeholder="Nome (Obrigatório)" formControlName="nome" [class.is-valid]="nome && nome.valid" [class.is-invalid]="nome && nome.touched && nome.invalid" />
+            <label for="nome">Nome</label>
+            <input class="form-control" id="nome" type="text" placeholder="Obrigatório" formControlName="nome" [class.is-valid]="nome && nome.valid" [class.is-invalid]="nome && nome.touched && nome.invalid" />
           </div>
         </div>
       </form>

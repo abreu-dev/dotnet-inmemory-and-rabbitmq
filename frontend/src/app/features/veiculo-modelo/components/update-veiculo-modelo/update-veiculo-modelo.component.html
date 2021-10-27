@@ -10,7 +10,11 @@
       <form [formGroup]="form">
         <div class="form-group">
           <div class="col-md-10">
+            <label for="nome">Nome</label>
             <input class="form-control" id="nome" type="text" placeholder="Nome (Obrigatório)" formControlName="nome" [class.is-valid]="nome && nome.valid" [class.is-invalid]="nome && nome.touched && nome.invalid" />
+            <br />
+            <label for="nome">Marca de Veículo</label>
+            <app-typeahead-veiculo-marca [control]="veiculoMarca"></app-typeahead-veiculo-marca>
           </div>
         </div>
       </form>

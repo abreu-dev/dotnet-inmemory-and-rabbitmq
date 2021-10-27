@@ -1,0 +1,16 @@
+<ng-template #rt let-r="result" let-t="term">
+  {{ r.nome }}
+</ng-template>
+<input
+  id="veiculo-marca-typeahead"
+  type="text"
+  class="form-control"
+  [placeholder]="isRequired ? 'Obrigatório' : ''"
+  [class.is-valid]="control && control.valid"
+  [class.is-invalid]="control && control.touched && control.invalid"
+  [ngbTypeahead]="search"
+  [inputFormatter]="formatter"
+  [resultTemplate]="rt"
+  [formControl]="control"
+  (selectItem)="setModel($event)"
+/>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
@@ -23,11 +23,16 @@ export class UpdateVeiculoModeloComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [this.veiculoModelo.id],
       nome: [this.veiculoModelo.nome, Validators.required],
+      veiculoMarca: [this.veiculoModelo.veiculoMarca, Validators.required],
     });
   }
 
   public get nome() {
     return this.form.get("nome");
+  }
+
+  public get veiculoMarca() {
+    return this.form.get("veiculoMarca") as FormControl;
   }
 
   public confirm(): void {
@@ -38,6 +43,7 @@ export class UpdateVeiculoModeloComponent implements OnInit {
 
     this.submitting = true;
     this.veiculoModelo = Object.assign({}, this.veiculoModelo, this.form.value);
+    this.veiculoModelo.veiculoMarcaId = this.veiculoModelo.veiculoMarca.id;
     this.veiculoModeloService.update(this.veiculoModelo).subscribe(
       () => {
         this.toastrService.info("Modelo de Veículo atualizado com sucesso, aguarde alguns segundos e ele será atualizado.");

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
@@ -24,11 +24,16 @@ export class AddVeiculoComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
       placa: ["", Validators.required],
+      veiculoModelo: [null, Validators.required],
     });
   }
 
   public get placa() {
     return this.form.get("placa");
+  }
+
+  public get veiculoModelo() {
+    return this.form.get("veiculoModelo") as FormControl;
   }
 
   public confirm(): void {
@@ -39,6 +44,7 @@ export class AddVeiculoComponent implements OnInit {
 
     this.submitting = true;
     this.veiculo = Object.assign({}, this.veiculo, this.form.value);
+    this.veiculo.veiculoModeloId = this.veiculo.veiculoModelo.id;
     this.veiculoService.add(this.veiculo).subscribe(
       () => {
         this.toastrService.info("Veiculo adicionado com sucesso, aguarde alguns segundos e ele estará na listagem.");

@@ -16,13 +16,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         error = { errors: [] };
 
         if (err.status === 0) {
-          error.errors.push("Server unreachable.");
-          this.toastrService.error("Server unreachable.");
+          error.errors.push("Servidor inalcançável.");
+          this.toastrService.error("Servidor inalcançável.");
         }
 
         if (err.status === 500) {
-          error.errors.push("Server could not process your request successfully.");
-          this.toastrService.error("Server could not process your request successfully.");
+          error.errors.push("Servidor não pode processar a requisição com sucesso.");
+          this.toastrService.error("Servidor não pode processar a requisição com sucesso.");
         }
 
         if (err.status === 400) {

@@ -11,10 +11,11 @@ import { VeiculoService } from "./shared/services/veiculo.service";
 import { VeiculoListComponent } from "./veiculo-list.component";
 import { VeiculoRoutingModule } from "./veiculo-routing.module";
 import { NgxMaskModule } from "ngx-mask";
+import { VeiculoModeloModule } from "../veiculo-modelo/veiculo-modelo.module";
 
 @NgModule({
   declarations: [VeiculoListComponent, AddVeiculoComponent, UpdateVeiculoComponent, ViewVeiculoComponent, RemoveVeiculoComponent],
-  imports: [CommonModule, RouterModule, VeiculoRoutingModule, FormsModule, ReactiveFormsModule, NgxMaskModule.forChild()],
+  imports: [CommonModule, RouterModule, VeiculoRoutingModule, FormsModule, ReactiveFormsModule, NgxMaskModule.forChild(), VeiculoModeloModule],
   providers: [VeiculoService],
 })
 export class VeiculoModule {}

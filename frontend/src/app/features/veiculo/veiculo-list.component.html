@@ -18,6 +18,8 @@
           <tr>
             <th>Id</th>
             <td>Placa</td>
+            <td>Modelo</td>
+            <td>Marca</td>
             <td></td>
           </tr>
         </thead>
@@ -25,6 +27,8 @@
           <tr *ngFor="let veiculo of veiculos">
             <td>{{ veiculo.id }}</td>
             <td>{{ veiculo.placa | mask: plateMask }}</td>
+            <td>{{ veiculo.veiculoModelo.nome }}</td>
+            <td>{{ veiculo.veiculoModelo.veiculoMarca.nome }}</td>
             <td>
               <ul class="list-inline">
                 <li class="list-inline-item">
