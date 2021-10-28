@@ -1,16 +1,7 @@
-﻿using Supply.Caching.Entities;
-using System;
-using System.Collections.Generic;
+﻿using Supply.Caching.Core.Data;
+using Supply.Caching.Entities;
 
 namespace Supply.Caching.Interfaces
 {
-    public interface IVeiculoMarcaCacheRepository
-    {
-        IEnumerable<VeiculoMarcaCache> GetAll();
-        VeiculoMarcaCache GetById(Guid id);
-
-        void Add(VeiculoMarcaCache veiculoMarcaCache);
-        void Update(VeiculoMarcaCache veiculoMarcaCache);
-        void Remove(Guid id);
-    }
+    public interface IVeiculoMarcaCacheRepository : ICacheRepository<VeiculoMarcaCache> { }
 }

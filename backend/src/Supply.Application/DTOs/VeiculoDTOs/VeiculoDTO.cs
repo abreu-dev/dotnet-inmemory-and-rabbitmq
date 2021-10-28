@@ -1,9 +1,10 @@
-﻿using Supply.Application.DTOs.VeiculoModeloDTOs;
+﻿using Supply.Application.Core.Application;
+using Supply.Application.DTOs.VeiculoModeloDTOs;
 using System;
 
 namespace Supply.Application.DTOs.VeiculoDTOs
 {
-    public class VeiculoDTO
+    public class VeiculoDTO : DTO
     {
         public Guid Id { get; set; }
         public string Placa { get; set; }

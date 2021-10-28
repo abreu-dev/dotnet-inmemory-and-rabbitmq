@@ -1,4 +1,4 @@
-﻿using Supply.Domain.Core.Messaging.Domain;
+﻿using Supply.Domain.Core.Domain;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +7,6 @@ namespace Supply.Domain.Entities
     public class VeiculoModelo : Entity
     {
         public string Nome { get; private set; }
-        public bool Removed { get; private set; }
         public Guid VeiculoMarcaId { get; private set; }
 
         // EF Rel.
@@ -36,11 +35,6 @@ namespace Supply.Domain.Entities
         public void UpdateVeiculoMarcaId(Guid veiculoMarcaId)
         {
             VeiculoMarcaId = veiculoMarcaId;
-        }
-
-        public void Remove()
-        {
-            Removed = true;
         }
     }
 }

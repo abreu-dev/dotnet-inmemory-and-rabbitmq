@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace Supply.Domain.Core.Messaging.Domain
+namespace Supply.Domain.Core.Domain
 {
     public abstract class Entity
     {
         public Guid Id { get; private set; }
+        public bool Removed { get; private set; }
 
         protected Entity()
         {
@@ -14,6 +15,11 @@ namespace Supply.Domain.Core.Messaging.Domain
         protected Entity(Guid id)
         {
             Id = id;
+        }
+
+        public void Remove()
+        {
+            Removed = true;
         }
     }
 }
