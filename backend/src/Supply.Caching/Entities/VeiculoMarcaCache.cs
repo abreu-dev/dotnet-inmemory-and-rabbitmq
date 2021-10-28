@@ -1,13 +1,10 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using Supply.Caching.Core.Caching;
 using System;
 
 namespace Supply.Caching.Entities
 {
-    public class VeiculoMarcaCache
+    public class VeiculoMarcaCache : CacheEntity
     {
-        [BsonId]
-        public string Id { get; set; }
-
         public string Nome { get; set; }
 
         public VeiculoMarcaCache(Guid id, string nome)

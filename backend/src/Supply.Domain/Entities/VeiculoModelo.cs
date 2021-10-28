@@ -1,4 +1,4 @@
-﻿using Supply.Domain.Core.Messaging.Domain;
+﻿using Supply.Domain.Core.Domain;
 using System;
 using System.Collections.Generic;
 

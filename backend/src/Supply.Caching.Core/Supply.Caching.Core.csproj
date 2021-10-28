@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Supply.Caching.Core\Supply.Caching.Core.csproj" />
+    <PackageReference Include="MongoDB.Driver" Version="2.13.2" />
   </ItemGroup>
 
 </Project>

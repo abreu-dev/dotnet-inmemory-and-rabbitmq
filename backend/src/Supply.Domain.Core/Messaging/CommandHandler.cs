@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
+using Supply.Domain.Core.Data;
 using Supply.Domain.Core.Domain;
-using Supply.Domain.Core.Messaging.Data;
+using System.Threading.Tasks;
 
 namespace Supply.Domain.Core.Messaging
 {

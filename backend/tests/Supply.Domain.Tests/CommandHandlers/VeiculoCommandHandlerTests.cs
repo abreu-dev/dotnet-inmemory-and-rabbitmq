@@ -2,8 +2,8 @@
 using Moq.AutoMock;
 using Supply.Domain.CommandHandlers;
 using Supply.Domain.Commands.VeiculoCommands;
+using Supply.Domain.Core.Data;
 using Supply.Domain.Core.Domain;
-using Supply.Domain.Core.Messaging.Data;
 using Supply.Domain.Entities;
 using Supply.Domain.Interfaces;
 using System;

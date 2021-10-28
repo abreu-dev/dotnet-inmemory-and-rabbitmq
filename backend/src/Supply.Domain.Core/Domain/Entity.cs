@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Supply.Domain.Core.Messaging.Domain
+namespace Supply.Domain.Core.Domain
 {
     public abstract class Entity
     {
