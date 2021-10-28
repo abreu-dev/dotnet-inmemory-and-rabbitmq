@@ -6,5 +6,6 @@ namespace Supply.Caching.Core.Caching
     {
         [BsonId]
         public string Id { get; set; }
+        public int Codigo { get; set; }
     }
 }

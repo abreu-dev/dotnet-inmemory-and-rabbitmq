@@ -17,6 +17,7 @@
         <thead>
           <tr>
             <th>Id</th>
+            <td>Codigo</td>
             <td>Placa</td>
             <td>Modelo</td>
             <td>Marca</td>
@@ -26,6 +27,7 @@
         <tbody>
           <tr *ngFor="let veiculo of veiculos">
             <td>{{ veiculo.id }}</td>
+            <td>{{ veiculo.codigo }}</td>
             <td>{{ veiculo.placa | mask: plateMask }}</td>
             <td>{{ veiculo.veiculoModelo.nome }}</td>
             <td>{{ veiculo.veiculoModelo.veiculoMarca.nome }}</td>

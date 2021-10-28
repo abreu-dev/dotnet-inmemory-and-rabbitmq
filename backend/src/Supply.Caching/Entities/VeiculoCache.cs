@@ -9,11 +9,12 @@ namespace Supply.Caching.Entities
 
         public VeiculoModeloCache VeiculoModelo { get; set; }
 
-        public VeiculoCache(Guid id, string placa, Guid veiculoModeloId, string veiculoModeloNome, Guid veiculoMarcaId, string veiculoMarcaNome)
+        public VeiculoCache(Guid id, int codigo, string placa, Guid veiculoModeloId, int veiculoModeloCodigo, string veiculoModeloNome, Guid veiculoMarcaId, int veiculoMarcaCodigo, string veiculoMarcaNome)
         {
             Id = id.ToString();
+            Codigo = codigo;
             Placa = placa;
-            VeiculoModelo = new VeiculoModeloCache(veiculoModeloId, veiculoModeloNome, veiculoMarcaId, veiculoMarcaNome);
+            VeiculoModelo = new VeiculoModeloCache(veiculoModeloId, veiculoModeloCodigo, veiculoModeloNome, veiculoMarcaId, veiculoMarcaCodigo, veiculoMarcaNome);
         }
     }
 }

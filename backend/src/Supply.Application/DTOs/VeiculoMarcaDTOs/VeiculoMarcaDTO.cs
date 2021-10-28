@@ -6,6 +6,7 @@ namespace Supply.Application.DTOs.VeiculoMarcaDTOs
     public class VeiculoMarcaDTO : DTO
     {
         public Guid Id { get; set; }
+        public int Codigo { get; set; }
         public string Nome { get; set; }
     }
 }
