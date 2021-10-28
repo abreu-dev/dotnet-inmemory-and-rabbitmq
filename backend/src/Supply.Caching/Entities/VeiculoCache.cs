@@ -6,14 +6,18 @@ namespace Supply.Caching.Entities
     public class VeiculoCache : CacheEntity
     {
         public string Placa { get; set; }
-
+        public DateTime DataAquisicao { get; set; }
+        public double ValorAquisicao { get; set; }
         public VeiculoModeloCache VeiculoModelo { get; set; }
 
-        public VeiculoCache(Guid id, string placa, Guid veiculoModeloId, string veiculoModeloNome, Guid veiculoMarcaId, string veiculoMarcaNome)
+        public VeiculoCache(Guid id, int codigo, string placa, DateTime dataAquisicao, double valorAquisicao, Guid veiculoModeloId, int veiculoModeloCodigo, string veiculoModeloNome, Guid veiculoMarcaId, int veiculoMarcaCodigo, string veiculoMarcaNome)
         {
             Id = id.ToString();
+            Codigo = codigo;
             Placa = placa;
-            VeiculoModelo = new VeiculoModeloCache(veiculoModeloId, veiculoModeloNome, veiculoMarcaId, veiculoMarcaNome);
+            DataAquisicao = dataAquisicao;
+            ValorAquisicao = valorAquisicao;
+            VeiculoModelo = new VeiculoModeloCache(veiculoModeloId, veiculoModeloCodigo, veiculoModeloNome, veiculoMarcaId, veiculoMarcaCodigo, veiculoMarcaNome);
         }
     }
 }

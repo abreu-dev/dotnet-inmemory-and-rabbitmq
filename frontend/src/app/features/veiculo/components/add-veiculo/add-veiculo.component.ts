@@ -24,12 +24,22 @@ export class AddVeiculoComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
       placa: ["", Validators.required],
+      dataAquisicao: ["", Validators.required],
+      valorAquisicao: ["", Validators.required],
       veiculoModelo: [null, Validators.required],
     });
   }
 
   public get placa() {
     return this.form.get("placa");
+  }
+
+  public get dataAquisicao() {
+    return this.form.get("dataAquisicao");
+  }
+
+  public get valorAquisicao() {
+    return this.form.get("valorAquisicao");
   }
 
   public get veiculoModelo() {

@@ -31,7 +31,7 @@ namespace Supply.Infra.Data.EventHandlers
         public async Task Handle(VeiculoMarcaAddedEvent notification, CancellationToken cancellationToken)
         {
             var veiculoMarca = await _veiculoMarcaRepository.GetById(notification.AggregateId);
-            var veiculoMarcaCache = new VeiculoMarcaCache(veiculoMarca.Id, veiculoMarca.Nome);
+            var veiculoMarcaCache = new VeiculoMarcaCache(veiculoMarca.Id, veiculoMarca.Codigo, veiculoMarca.Nome);
 
             _veiculoMarcaCacheRepository.Add(veiculoMarcaCache);
         }
@@ -39,7 +39,7 @@ namespace Supply.Infra.Data.EventHandlers
         public async Task Handle(VeiculoMarcaUpdatedEvent notification, CancellationToken cancellationToken)
         {
             var veiculoMarca = await _veiculoMarcaRepository.GetByIdWithIncludes(notification.AggregateId);
-            var veiculoMarcaCache = new VeiculoMarcaCache(veiculoMarca.Id, veiculoMarca.Nome);
+            var veiculoMarcaCache = new VeiculoMarcaCache(veiculoMarca.Id, veiculoMarca.Codigo, veiculoMarca.Nome);
 
             _veiculoMarcaCacheRepository.Update(veiculoMarcaCache);
 

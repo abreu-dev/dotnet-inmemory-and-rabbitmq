@@ -21,10 +21,10 @@ namespace Supply.Application.AutoMapper
         private void CreateVeiculoMap()
         {
             CreateMap<AddVeiculoDTO, AddVeiculoCommand>()
-                .ConstructUsing(c => new AddVeiculoCommand(c.Placa, c.VeiculoModeloId));
+                .ConstructUsing(c => new AddVeiculoCommand(c.Placa, c.DataAquisicao, c.ValorAquisicao, c.VeiculoModeloId));
 
             CreateMap<UpdateVeiculoDTO, UpdateVeiculoCommand>()
-                .ConstructUsing(c => new UpdateVeiculoCommand(c.Id, c.Placa, c.VeiculoModeloId));
+                .ConstructUsing(c => new UpdateVeiculoCommand(c.Id, c.Placa, c.DataAquisicao, c.ValorAquisicao, c.VeiculoModeloId));
 
             CreateMap<Guid, RemoveVeiculoCommand>()
                 .ConstructUsing(c => new RemoveVeiculoCommand(c));

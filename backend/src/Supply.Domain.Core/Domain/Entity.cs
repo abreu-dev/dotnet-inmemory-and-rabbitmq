@@ -6,6 +6,7 @@ namespace Supply.Domain.Core.Domain
     {
         public Guid Id { get; private set; }
         public bool Removed { get; private set; }
+        public int Codigo { get; private set; }
 
         protected Entity()
         {

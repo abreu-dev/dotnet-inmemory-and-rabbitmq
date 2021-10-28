@@ -2,7 +2,10 @@ import { VeiculoModelo } from "../../../veiculo-modelo/shared/models/veiculo-mod
 
 export interface Veiculo {
   id: string;
+  codigo: number;
   placa: string;
+  dataAquisicao: Date;
+  valorAquisicao: number;
   veiculoModelo: VeiculoModelo;
   veiculoModeloId: string;
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Supply.Domain.Entities;
 
@@ -11,6 +12,10 @@ namespace Supply.Infra.Data.Mappings
             builder.ToTable("VeiculoModelo");
 
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Codigo)
+                .ValueGeneratedOnAdd()
+                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
             builder.Property(x => x.Nome)
                 .HasColumnName("Nome")

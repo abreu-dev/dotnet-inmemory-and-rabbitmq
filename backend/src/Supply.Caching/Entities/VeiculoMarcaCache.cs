@@ -7,9 +7,10 @@ namespace Supply.Caching.Entities
     {
         public string Nome { get; set; }
 
-        public VeiculoMarcaCache(Guid id, string nome)
+        public VeiculoMarcaCache(Guid id, int codigo, string nome)
         {
             Id = id.ToString();
+            Codigo = codigo;
             Nome = nome;
         }
     }

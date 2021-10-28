@@ -38,7 +38,7 @@ namespace Supply.Domain.CommandHandlers
                 return request.ValidationResult;
             }
 
-            var veiculo = new Veiculo(request.Placa, request.VeiculoModeloId);
+            var veiculo = new Veiculo(request.Placa, request.DataAquisicao, request.ValorAquisicao, request.VeiculoModeloId);
 
             if ((await _veiculoRepository.Search(x => x.Placa == veiculo.Placa)).Any())
             {
@@ -90,6 +90,8 @@ namespace Supply.Domain.CommandHandlers
 
             veiculo.UpdatePlaca(request.Placa);
             veiculo.UpdateVeiculoModeloId(request.VeiculoModeloId);
+            veiculo.UpdateDataAquisicao(request.DataAquisicao);
+            veiculo.UpdateValorAquisicao(request.ValorAquisicao);
             _veiculoRepository.Update(veiculo);
 
             if (await Commit(_veiculoRepository.UnitOfWork))

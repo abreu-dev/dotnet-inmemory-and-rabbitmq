@@ -27,10 +27,15 @@ namespace Supply.Infra.Data.EventHandlers
         {
             var veiculo = await _veiculoRepository.GetByIdWithIncludes(notification.AggregateId);
             var veiculoCache = new VeiculoCache(veiculo.Id,
+                                                veiculo.Codigo,
                                                 veiculo.Placa,
+                                                veiculo.DataAquisicao,
+                                                veiculo.ValorAquisicao,
                                                 veiculo.VeiculoModeloId,
+                                                veiculo.VeiculoModelo.Codigo,
                                                 veiculo.VeiculoModelo.Nome,
                                                 veiculo.VeiculoModelo.VeiculoMarcaId,
+                                                veiculo.VeiculoModelo.Codigo,
                                                 veiculo.VeiculoModelo.VeiculoMarca.Nome);
 
             _veiculoCacheRepository.Add(veiculoCache);
@@ -39,11 +44,16 @@ namespace Supply.Infra.Data.EventHandlers
         public async Task Handle(VeiculoUpdatedEvent notification, CancellationToken cancellationToken)
         {
             var veiculo = await _veiculoRepository.GetByIdWithIncludes(notification.AggregateId);
-            var veiculoCache = new VeiculoCache(veiculo.Id, 
-                                                veiculo.Placa, 
+            var veiculoCache = new VeiculoCache(veiculo.Id,
+                                                veiculo.Codigo,
+                                                veiculo.Placa,
+                                                veiculo.DataAquisicao,
+                                                veiculo.ValorAquisicao,
                                                 veiculo.VeiculoModeloId,
+                                                veiculo.VeiculoModelo.Codigo,
                                                 veiculo.VeiculoModelo.Nome,
                                                 veiculo.VeiculoModelo.VeiculoMarcaId,
+                                                veiculo.VeiculoModelo.Codigo,
                                                 veiculo.VeiculoModelo.VeiculoMarca.Nome);
 
             _veiculoCacheRepository.Update(veiculoCache);

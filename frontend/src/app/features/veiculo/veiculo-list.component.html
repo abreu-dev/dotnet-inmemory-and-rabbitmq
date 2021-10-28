@@ -16,8 +16,10 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Id</th>
+            <td>Código</td>
             <td>Placa</td>
+            <td>Data de Aquisição</td>
+            <td>Valor de Aquisição</td>
             <td>Modelo</td>
             <td>Marca</td>
             <td></td>
@@ -25,8 +27,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let veiculo of veiculos">
-            <td>{{ veiculo.id }}</td>
+            <td>{{ veiculo.codigo }}</td>
             <td>{{ veiculo.placa | mask: plateMask }}</td>
+            <td>{{ veiculo.dataAquisicao | date: "dd/MM/yyyy" }}</td>
+            <td>{{ veiculo.valorAquisicao }}</td>
             <td>{{ veiculo.veiculoModelo.nome }}</td>
             <td>{{ veiculo.veiculoModelo.veiculoMarca.nome }}</td>
             <td>
