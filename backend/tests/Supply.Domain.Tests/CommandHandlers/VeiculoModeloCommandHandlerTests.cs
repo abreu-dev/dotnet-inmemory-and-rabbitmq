@@ -333,7 +333,7 @@ namespace Supply.Domain.Tests.CommandHandlers
             var command = new RemoveVeiculoModeloCommand(Guid.NewGuid());
 
             var modelo = new VeiculoModelo(command.AggregateId, "Marca", Guid.NewGuid());
-            modelo.Veiculos.Add(new Veiculo("PLA1234", modelo.Id));
+            modelo.Veiculos.Add(new Veiculo("PLA1234", DateTime.Now, 100.25, modelo.Id));
             _autoMocker.GetMock<IVeiculoModeloRepository>()
                 .Setup(x => x.GetByIdWithIncludes(It.Is<Guid>(g => g.Equals(command.AggregateId))))
                 .ReturnsAsync(modelo);

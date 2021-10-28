@@ -30,6 +30,9 @@ namespace Supply.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DataAquisicao")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Placa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -38,6 +41,9 @@ namespace Supply.Infra.Data.Migrations
                     b.Property<bool>("Removed")
                         .HasColumnType("bit")
                         .HasColumnName("Removed");
+
+                    b.Property<double>("ValorAquisicao")
+                        .HasColumnType("float");
 
                     b.Property<Guid>("VeiculoModeloId")
                         .HasColumnType("uniqueidentifier");

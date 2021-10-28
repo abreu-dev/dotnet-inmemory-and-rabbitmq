@@ -25,12 +25,22 @@ export class UpdateVeiculoComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [this.veiculo.id],
       placa: [this.veiculo.placa, Validators.required],
+      dataAquisicao: [new Date(this.veiculo.dataAquisicao).toISOString().split("T")[0], Validators.required],
+      valorAquisicao: [this.veiculo.valorAquisicao, Validators.required],
       veiculoModelo: [this.veiculo.veiculoModelo, Validators.required],
     });
   }
 
   public get placa() {
     return this.form.get("placa");
+  }
+
+  public get dataAquisicao() {
+    return this.form.get("dataAquisicao");
+  }
+
+  public get valorAquisicao() {
+    return this.form.get("valorAquisicao");
   }
 
   public get veiculoModelo() {

@@ -32,7 +32,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_AddVeiculoCommand_ShouldFailValidation_WhenEmptyPlaca()
         {
             // Arrange
-            var command = new AddVeiculoCommand("", Guid.NewGuid());
+            var command = new AddVeiculoCommand("", DateTime.Now, 100.25, Guid.NewGuid());
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -47,7 +47,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_AddVeiculoCommand_ShouldFailValidation_WhenInvalidPlaca()
         {
             // Arrange
-            var command = new AddVeiculoCommand("ABCDEFG", Guid.NewGuid());
+            var command = new AddVeiculoCommand("ABCDEFG", DateTime.Now, 100.25, Guid.NewGuid());
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -62,11 +62,11 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_AddVeiculoCommand_ShouldFailValidation_WhenPlacaAlreadyInUse()
         {
             // Arrange
-            var command = new AddVeiculoCommand("PLA1234", Guid.NewGuid());
+            var command = new AddVeiculoCommand("PLA1234", DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
-               .ReturnsAsync(new List<Veiculo>() { new Veiculo(command.Placa, Guid.NewGuid()) });
+               .ReturnsAsync(new List<Veiculo>() { new Veiculo(command.Placa, DateTime.Now, 100.25, Guid.NewGuid()) });
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -81,7 +81,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_AddVeiculoCommand_ShouldFailValidation_WhenVeiculoModeloIdNotFound()
         {
             // Arrange
-            var command = new AddVeiculoCommand("PLA1234", Guid.NewGuid());
+            var command = new AddVeiculoCommand("PLA1234", DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
@@ -106,7 +106,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_AddVeiculoCommand_ShouldAddAndCommit_WhenValid(string placa)
         {
             // Arrange
-            var command = new AddVeiculoCommand(placa, Guid.NewGuid());
+            var command = new AddVeiculoCommand(placa, DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
@@ -141,7 +141,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldFailValidation_WhenEmptyId()
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.Empty, "PLA1234", Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.Empty, "PLA1234", DateTime.Now, 100.25, Guid.NewGuid());
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -156,7 +156,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldFailValidation_WhenEmptyPlaca()
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "", Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "", DateTime.Now, 100.25, Guid.NewGuid());
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -171,7 +171,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldFailValidation_WhenInvalidPlaca()
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "ABCDEFG", Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "ABCDEFG", DateTime.Now, 100.25, Guid.NewGuid());
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -186,7 +186,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldFailValidation_WhenVeiculoNotFound()
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "PLA1234", Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "PLA1234", DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
@@ -209,15 +209,15 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldFailValidation_WhenPlacaAlreadyInUse()
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "PLA1234", Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "PLA1234", DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
-                .ReturnsAsync(new List<Veiculo>() { new Veiculo(command.Placa, Guid.NewGuid()) });
+                .ReturnsAsync(new List<Veiculo>() { new Veiculo(command.Placa, DateTime.Now, 100.25, Guid.NewGuid()) });
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", Guid.NewGuid()));
+                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", DateTime.Now, 100.25, Guid.NewGuid()));
 
             // Act
             var validationResult = await _veiculoCommandHandler.Handle(command, CancellationToken.None);
@@ -232,7 +232,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldFailValidation_WhenVeiculoModeloIdNotFound()
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "PLA1234", Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.NewGuid(), "PLA1234", DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
@@ -240,7 +240,7 @@ namespace Supply.Domain.Tests.CommandHandlers
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", Guid.NewGuid()));
+                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", DateTime.Now, 100.25, Guid.NewGuid()));
 
             _autoMocker.GetMock<IVeiculoModeloRepository>()
                .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoModelo, bool>>>()))
@@ -261,7 +261,7 @@ namespace Supply.Domain.Tests.CommandHandlers
         public async Task Handle_UpdateVeiculoCommand_ShouldUpdateAndCommit_WhenValid(string placa)
         {
             // Arrange
-            var command = new UpdateVeiculoCommand(Guid.NewGuid(), placa, Guid.NewGuid());
+            var command = new UpdateVeiculoCommand(Guid.NewGuid(), placa, DateTime.Now, 100.25, Guid.NewGuid());
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.Search(It.IsAny<Expression<Func<Veiculo, bool>>>()))
@@ -269,7 +269,7 @@ namespace Supply.Domain.Tests.CommandHandlers
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", Guid.NewGuid()));
+                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", DateTime.Now, 100.25, Guid.NewGuid()));
 
             _autoMocker.GetMock<IVeiculoModeloRepository>()
                .Setup(x => x.Search(It.IsAny<Expression<Func<VeiculoModelo, bool>>>()))
@@ -339,7 +339,7 @@ namespace Supply.Domain.Tests.CommandHandlers
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.GetById(It.Is<Guid>(g => g.Equals(command.AggregateId))))
-                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", Guid.NewGuid()));
+                .ReturnsAsync(new Veiculo(command.AggregateId, "PLA7946", DateTime.Now, 100.25, Guid.NewGuid()));
 
             _autoMocker.GetMock<IVeiculoRepository>()
                 .Setup(x => x.UnitOfWork).Returns(_autoMocker.GetMock<IUnitOfWork>().Object);

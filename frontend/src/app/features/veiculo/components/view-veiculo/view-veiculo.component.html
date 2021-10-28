@@ -10,6 +10,12 @@
             <label for="nome">Nome</label>
             <input class="form-control" id="placa" type="text" [value]="veiculo.placa | mask: plateMask" disabled />
             <br />
+            <label for="dataAquisicao">Data de Aquisição</label>
+            <input class="form-control" id="dataAquisicao" type="text" [value]="veiculo.dataAquisicao | date: 'dd/MM/yyyy'" disabled />
+            <br />
+            <label for="valorAquisicao">Valor de Aquisição</label>
+            <input class="form-control" id="valorAquisicao" type="text" [value]="veiculo.valorAquisicao" disabled />
+            <br />
             <label for="nome">Modelo de Veículo</label>
             <input class="form-control" id="veiculoModelo" type="text" [value]="veiculo.veiculoModelo.nome" disabled />
           </div>

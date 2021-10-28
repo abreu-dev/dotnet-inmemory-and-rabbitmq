@@ -16,7 +16,6 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Id</th>
             <td>Codigo</td>
             <td>Nome</td>
             <td>Marca</td>
@@ -25,7 +24,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let veiculoModelo of veiculoModelos">
-            <td>{{ veiculoModelo.id }}</td>
             <td>{{ veiculoModelo.codigo }}</td>
             <td>{{ veiculoModelo.nome }}</td>
             <td>{{ veiculoModelo.veiculoMarca.nome }}</td>

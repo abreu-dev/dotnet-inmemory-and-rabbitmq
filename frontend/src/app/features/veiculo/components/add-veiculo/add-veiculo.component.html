@@ -22,6 +22,28 @@
               [mask]="plateMask"
             />
             <br />
+            <label for="dataAquisicao">Data de Aquisição</label>
+            <input
+              class="form-control"
+              id="dataAquisicao"
+              type="date"
+              placeholder="Obrigatório"
+              formControlName="dataAquisicao"
+              [class.is-valid]="dataAquisicao && dataAquisicao.valid"
+              [class.is-invalid]="dataAquisicao && dataAquisicao.touched && dataAquisicao.invalid"
+            />
+            <br />
+            <label for="valorAquisicao">Valor de Aquisição</label>
+            <input
+              class="form-control"
+              id="valorAquisicao"
+              type="number"
+              placeholder="Obrigatório"
+              formControlName="valorAquisicao"
+              [class.is-valid]="valorAquisicao && valorAquisicao.valid"
+              [class.is-invalid]="valorAquisicao && valorAquisicao.touched && valorAquisicao.invalid"
+            />
+            <br />
             <label for="nome">Modelo de Veículo</label>
             <app-typeahead-veiculo-modelo [control]="veiculoModelo"></app-typeahead-veiculo-modelo>
           </div>

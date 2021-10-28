@@ -9,6 +9,8 @@ namespace Supply.Application.DTOs.VeiculoDTOs
         public Guid Id { get; set; }
         public int Codigo { get; set; }
         public string Placa { get; set; }
+        public DateTime DataAquisicao { get; set; }
+        public double ValorAquisicao { get; set; }
         public VeiculoModeloDTO VeiculoModelo { get; set; }
     }
 }
